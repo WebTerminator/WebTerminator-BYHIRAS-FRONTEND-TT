@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
 
-export const Player = ({ isLayoutReversed, name }) => {
+export const Player = ({
+  lossValue,
+  healthPoints,
+  isLayoutReversed,
+  name
+}) => {
+  const [health, setHealth] = useState(healthPoints)
   const className = classNames('layout', ({ 'right': isLayoutReversed }));
 
-  return <div className={className}>{name}</div>;
-}
+  useEffect(() => {
+    setHealth(health - lossValue);
+  }, [lossValue]);
+
+  return <div className={className}>{name} has health {health} points left</div>;
+};
 
 Player.propTypes = {
   name: PropTypes.string.isRequired,
   healthPoints: PropTypes.number,
-  diceOne: PropTypes.number,
-  diceTwo: PropTypes.number,
+  dicesValue: PropTypes.object,
   icon: PropTypes.element,
-  layout: PropTypes.string
+  layout: PropTypes.string,
+  lossValue: PropTypes.number
+};
+
+Player.defaultProps = {
+  healthPoints: 100
 };
