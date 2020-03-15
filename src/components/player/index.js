@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames'
 
 export const Player = ({
+  dicesValue,
   lossValue,
   healthPoints,
   isLayoutReversed,
@@ -15,13 +16,19 @@ export const Player = ({
     setHealth(health - lossValue);
   }, [lossValue]);
 
-  return <div className={className}>{name} has health {health} points left</div>;
+  return (
+    <>
+      <div className={className}>
+        {name} has health {health} points left and the score is {dicesValue}
+      </div>
+    </>
+  )
 };
 
 Player.propTypes = {
   name: PropTypes.string.isRequired,
   healthPoints: PropTypes.number,
-  dicesValue: PropTypes.object,
+  dicesValue: PropTypes.number,
   icon: PropTypes.element,
   layout: PropTypes.string,
   lossValue: PropTypes.number

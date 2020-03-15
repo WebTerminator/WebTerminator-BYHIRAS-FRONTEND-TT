@@ -29,6 +29,16 @@ const App = () => {
     }
   };
 
+  const handleLoosingPlayer = (score, name) => {
+    if (name === 'Player1') {
+      setLossValueP1(score);
+    } else {
+      setLossValueP2(score);
+    }
+
+    setLoosingPlayer({ name, score });
+  }
+
   const handleOnClick = () => {
     const dicesValue = getDicesValue();
     const { dice1, dice2, dice3, dice4 } = dicesValue;
@@ -38,30 +48,31 @@ const App = () => {
 
     if (playery1DicesSum < playery2DicesSum) {
       const score = playery2DicesSum - playery1DicesSum;
-      setLossValueP1(score);
-      setLoosingPlayer({ name: 'Player1', score });
+      handleLoosingPlayer(score, 'Player1');
     } else {
       const score = playery1DicesSum - playery2DicesSum;
-      setLossValueP2(score);
-      setLoosingPlayer({ name: 'Player2', score });
+      handleLoosingPlayer(score, 'Player2');
     }
-
 
     setDicesValue(dicesValue);
   };
 
   const { dice1, dice2, dice3, dice4 } = dicesValue;
 
+  const hasTheGameStarted = Object.keys(dicesValue).length !== 0;
+  const player1DicesValues = hasTheGameStarted ? (dice1 + dice2) : 0;
+  const player2DicesValues = hasTheGameStarted ? (dice3 + dice4) : 0;
+
   return (
     <section className="app">
       <div className="game-wrapper">
-        <Player1 lossValue={lossValueP1} dicesValue={{ dice1, dice2 }} name="Player 1" />
+        <Player1 lossValue={lossValueP1} dicesValue={player1DicesValues} name="Player 1" />
         {loosingPlayer.name !== '' &&
           (loosingPlayer.score === 0
             ? <p>nobody has taken a hit, carry on playing</p>
             : <p className="display">{loosingPlayer.name} has taken a hit of {loosingPlayer.score}</p>
           )}
-        <Player2 lossValue={lossValueP2} dicesValue={{ dice3, dice4 }} name="Player 2" />
+        <Player2 lossValue={lossValueP2} dicesValue={player2DicesValues} name="Player 2" />
         <button onClick={handleOnClick}>Attack!</button>
       </div>
     </section>
