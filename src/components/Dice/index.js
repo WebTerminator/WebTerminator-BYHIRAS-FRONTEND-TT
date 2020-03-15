@@ -61,7 +61,7 @@ const Dice = ({ dots }) => {
 };
 
 Dice.propTypes = {
-  dots: PropTypes.number.isRequired
+  dots: PropTypes.number
 };
 
 export default Dice;

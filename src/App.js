@@ -12,6 +12,7 @@ const App = () => {
   const [lossValueP1, setLossValueP1] = useState(0);
   const [lossValueP2, setLossValueP2] = useState(0);
   const [loosingPlayer, setLoosingPlayer] = useState({ name: '', score: null });
+  const [winner, setWinner] = useState('');
 
   const handleLoosingPlayer = (score, name) => {
     if (name === 'Player1') {
@@ -49,23 +50,42 @@ const App = () => {
 
   return (
     <section className="app">
-      <div className="game-wrapper">
-        <Player1
-          icon={<HappyFace />}
-          lossValue={lossValueP1}
-          dicesValue={player1DicesValues}
-        />
+      {
+        winner === ''
+          ?
+          <>
+            <div className="game-wrapper">
+              <Player1
+                icon={<HappyFace />}
+                lossValue={lossValueP1}
+                dicesValue={player1DicesValues}
+                dice1={dice1}
+                dice2={dice2}
+                hasTheGameStarted={hasTheGameStarted}
+                name="Player1"
+                setWinner={setWinner}
+              />
 
-        <Display loosingPlayer={loosingPlayer} />
+              <Display loosingPlayer={loosingPlayer} />
 
-        <Player2
-          isLayoutReversed={true}
-          icon={<AngryFace />}
-          lossValue={lossValueP2}
-          dicesValue={player2DicesValues}
-        />
-      </div>
-      <button onClick={handleOnClick}>Attack!</button>
+              <Player2
+                isLayoutReversed={true}
+                icon={<AngryFace />}
+                lossValue={lossValueP2}
+                dicesValue={player2DicesValues}
+                dice1={dice3}
+                dice2={dice4}
+                hasTheGameStarted={hasTheGameStarted}
+                name="Player2"
+                setWinner={setWinner}
+              />
+            </div>
+            <button onClick={handleOnClick}>Attack!</button>
+          </>
+          : winner === 'Player1'
+            ? <p className="winner">You won</p>
+            : <p className="looser">Game over</p>
+      }
     </section>
   );
 }
