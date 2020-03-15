@@ -50,9 +50,20 @@ const App = () => {
   return (
     <section className="app">
       <div className="game-wrapper">
-        <Player1 icon={<HappyFace />} lossValue={lossValueP1} dicesValue={player1DicesValues} name="Player 1" />
+        <Player1
+          icon={<HappyFace />}
+          lossValue={lossValueP1}
+          dicesValue={player1DicesValues}
+        />
+
         <Display loosingPlayer={loosingPlayer} />
-        <Player2 isLayoutReversed={true} icon={<AngryFace />} lossValue={lossValueP2} dicesValue={player2DicesValues} name="Player 2" />
+
+        <Player2
+          isLayoutReversed={true}
+          icon={<AngryFace />}
+          lossValue={lossValueP2}
+          dicesValue={player2DicesValues}
+        />
       </div>
       <button onClick={handleOnClick}>Attack!</button>
     </section>

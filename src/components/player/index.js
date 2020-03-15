@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Bar from '../Bar/index';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Dice from '../Dice/index';
 
 export const Player = ({
   dicesValue,
   icon,
   lossValue,
   healthPoints,
-  isLayoutReversed,
-  name
+  isLayoutReversed
 }) => {
   const [health, setHealth] = useState(healthPoints)
   const className = classNames('player-info', ({ 'reverse-layout': isLayoutReversed }));
@@ -22,6 +22,7 @@ export const Player = ({
     <div className="player-wrapper">
       <div className={className}>
         {icon}
+        <Dice dots={6} />
         <Bar health={health} dicesValue={dicesValue} />
       </div>
     </div>
@@ -29,7 +30,6 @@ export const Player = ({
 };
 
 Player.propTypes = {
-  name: PropTypes.string.isRequired,
   healthPoints: PropTypes.number,
   dicesValue: PropTypes.number,
   icon: PropTypes.element,
