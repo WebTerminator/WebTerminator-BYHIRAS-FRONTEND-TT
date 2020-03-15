@@ -4,13 +4,26 @@ import PropTypes from 'prop-types';
 const Display = ({ loosingPlayer }) => {
   const { name, score } = loosingPlayer;
 
+  const getTextToDsiplay = (score) => {
+    let text = '';
+
+    switch (score) {
+      case null:
+        text = 'The game has not begun. Press on Attack to begin.'
+        break;
+      case 0:
+        text = 'nobody has taken a hit, carry on playing'
+        break;
+      default:
+        text = `${name} has taken a hit of ${score}`
+    }
+
+    return text;
+  }
+
   return (
     <div className="display-wrapper">
-      {
-        score > 0
-          ? <p className="display">{name} has taken a hit of {score}</p>
-          : <p>nobody has taken a hit, carry on playing</p>
-      }
+      <p>{getTextToDsiplay(score)}</p>
     </div>
   )
 };

@@ -11,7 +11,7 @@ const App = () => {
   const [dicesValue, setDicesValue] = useState({});
   const [lossValueP1, setLossValueP1] = useState(0);
   const [lossValueP2, setLossValueP2] = useState(0);
-  const [loosingPlayer, setLoosingPlayer] = useState({ name: '', score: 0 });
+  const [loosingPlayer, setLoosingPlayer] = useState({ name: '', score: null });
 
   const handleLoosingPlayer = (score, name) => {
     if (name === 'Player1') {
@@ -51,7 +51,7 @@ const App = () => {
     <section className="app">
       <div className="game-wrapper">
         <Player1 icon={<HappyFace />} lossValue={lossValueP1} dicesValue={player1DicesValues} name="Player 1" />
-        {loosingPlayer.name !== '' && <Display loosingPlayer={loosingPlayer} />}
+        <Display loosingPlayer={loosingPlayer} />
         <Player2 isLayoutReversed={true} icon={<AngryFace />} lossValue={lossValueP2} dicesValue={player2DicesValues} name="Player 2" />
       </div>
       <button onClick={handleOnClick}>Attack!</button>

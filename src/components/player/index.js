@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Bar from '../Bar/index';
 import PropTypes from 'prop-types';
-import classNames from 'classnames'
+import classNames from 'classnames';
 
 export const Player = ({
   dicesValue,
@@ -19,13 +20,9 @@ export const Player = ({
 
   return (
     <div className="player-wrapper">
-      <p>{name} has health {health}</p>
       <div className={className}>
         {icon}
-        <div className="health-bar-wrapper">
-          <div style={{ top: `${100 - health}px` }} className="health-bar" />
-        </div>
-        {dicesValue}
+        <Bar health={health} dicesValue={dicesValue} />
       </div>
     </div>
   )
