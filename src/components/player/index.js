@@ -4,24 +4,30 @@ import classNames from 'classnames'
 
 export const Player = ({
   dicesValue,
+  icon,
   lossValue,
   healthPoints,
   isLayoutReversed,
   name
 }) => {
   const [health, setHealth] = useState(healthPoints)
-  const className = classNames('layout', ({ 'right': isLayoutReversed }));
+  const className = classNames('player-info', ({ 'reverse-layout': isLayoutReversed }));
 
   useEffect(() => {
     setHealth(health - lossValue);
   }, [lossValue]);
 
   return (
-    <>
+    <div className="player-wrapper">
+      <p>{name} has health {health}</p>
       <div className={className}>
-        {name} has health {health} points left and the score is {dicesValue}
+        {icon}
+        <div className="health-bar-wrapper">
+          <div style={{ top: `${100 - health}px` }} className="health-bar" />
+        </div>
+        {dicesValue}
       </div>
-    </>
+    </div>
   )
 };
 
@@ -30,7 +36,7 @@ Player.propTypes = {
   healthPoints: PropTypes.number,
   dicesValue: PropTypes.number,
   icon: PropTypes.element,
-  layout: PropTypes.string,
+  isLayoutReversed: PropTypes.bool,
   lossValue: PropTypes.number
 };
 

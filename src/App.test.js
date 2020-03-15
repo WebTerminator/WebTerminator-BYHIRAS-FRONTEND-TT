@@ -9,10 +9,4 @@ describe('App', () => {
   it('should render the button with text Attack!', () => {
     expect(button).toBeInTheDocument();
   });
-
-  // it('should handle the click event', () => {
-  //   fireEvent.click(button);
-
-
-  // });
 });

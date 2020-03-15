@@ -11,7 +11,47 @@
 //   }
 // }
 
+* {
+  box-sizing: border-box;
+}
+
 .app {
-  max-width: 1024px;
+  max-width: 600px;
   margin: 20px auto 0;
+}
+
+.health-bar-wrapper {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #333;
+  width: 30px;
+  height: 150px;
+}
+
+.health-bar {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: green;
+  transition: all .3s ease-in;
+}
+
+.game-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.player-info {
+  display: flex;
+  flex: 1;
+
+  &.reverse-layout {
+    flex-direction: row-reverse;
+  }
+}
+
+.display-wrapper {
+  flex: 1;
 }
